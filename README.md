@@ -29,6 +29,6 @@ set up your cname on cloudflare/duckdns/etc and you should be able to navigate t
 note: the volume mappings will look incorrect but leave them as is. the docker-compose file does not need to be changed
 
 ## Using a port other than 5000
-The api listnening port is currently hardcoded to 5000 in its setup file. If you wish to change the FUNKWHALE_API_PORT variable and the $upstreamport nginx variable, you must run this command inside the funkwhale_api container:
+The api listnening port is currently hardcoded to 5000 in its setup file. If you wish to change the FUNKWHALE_API_PORT variable and the $upstreamport nginx variable, you must run this command inside the funkwhale_api container every time you start it:
 
 - exec gunicorn config.asgi:application --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:5402

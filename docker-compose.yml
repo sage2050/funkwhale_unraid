@@ -78,6 +78,7 @@ services:
       - "${MUSIC_DIRECTORY_SERVE_PATH-/srv/funkwhale/data/music}:${MUSIC_DIRECTORY_PATH-/music}:ro"
       - "${MEDIA_ROOT}:${MEDIA_ROOT}"
       - "${STATIC_ROOT}:${STATIC_ROOT}"
+    command: bash -c "exec gunicorn config.asgi:application --workers ${FUNKWHALE_WEB_WORKERS} --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:${FUNKWHALE_API_PORT}"
 
   front:
     restart: unless-stopped

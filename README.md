@@ -6,8 +6,9 @@ A modified docker compose and env file to simplify funkwhale depolyment on unrai
 
 1. Open unraid terminal and run the following command. you will use the output as your Django secret key
    - openssl rand -base64 45
-3. open the .env file in a text editor and configure the following variable
+3. open the .env file in a text editor and configure the following variables
    - FUNKWHALE_API_IP
+   - FUNKWHALE_API_PORT
    - FUNKWHALE_HOSTNAME
    - EMAIL_CONFIG (if desired)
    - ACCOUNT_EMAIL_VERIFICATION (if desired)
@@ -27,8 +28,3 @@ A modified docker compose and env file to simplify funkwhale depolyment on unrai
 set up your cname on cloudflare/duckdns/etc and you should be able to navigate to your funkwhale instance and login with your superuser account (you will NOT be able to login if you navigate to [IP]:[PORT] )
 
 note: the volume mappings will look incorrect but leave them as is. the docker-compose file does not need to be changed
-
-## Using a port other than 5000
-The api listnening port is currently hardcoded to 5000 in its setup file. If you wish to change the FUNKWHALE_API_PORT variable and the $upstreamport nginx variable, you must run this command inside the funkwhale_api container every time you start it:
-
-- exec gunicorn config.asgi:application --workers 4 --worker-class uvicorn.workers.UvicornWorker --bind 0.0.0.0:[NEW PORT]
